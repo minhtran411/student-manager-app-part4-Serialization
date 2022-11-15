@@ -4,13 +4,16 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class StudentManager {
+public class StudentManager implements Serializable {
 
 // Instance Variables
 	private List<Student> studentList;
@@ -262,4 +265,37 @@ public class StudentManager {
 			} // End catchEnd catch
 		} // End finally
 	}
+
+	//Method to write student data to a binary file
+	public void writeStudentDataToBinaryFile(String pathToStudentBinaryFile) {
+		FileOutputStream studentFileOutputStream = null;
+		ObjectOutputStream studentObjectOutputStream = null;
+
+		try {
+			//Create a file Output Stream
+			studentFileOutputStream = new FileOutputStream(pathToStudentBinaryFile);
+			//Create an object output Stream
+			studentObjectOutputStream = new ObjectOutputStream(studentFileOutputStream);
+			//Write student data from studentList to binary file
+			studentObjectOutputStream.writeObject(this);
+			System.out.println("Student data written to binary file located at: "+pathToStudentBinaryFile);
+		} catch (IOException IOEx) {
+			System.err.println("An IO Exception has been caught!");
+			IOEx.printStackTrace();
+		} catch (NullPointerException NuEx) {
+			System.err.println("A Null Pointer Exception has been caught!");
+			NuEx.printStackTrace();
+		} finally {
+			//close all stream
+			try {
+				studentFileOutputStream.close();
+				studentObjectOutputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
 } // End Class

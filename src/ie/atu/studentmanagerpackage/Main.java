@@ -23,5 +23,8 @@ public class Main {
         studentManagerObject1.findStudentsByAgeRange(21, 50);
         studentManagerObject1.writeStudentDataToCSVFile("./resources/students.ser");
         studentManagerObject1.readStudentDataFromCSVFile("./resources/students.ser");
+        
+        studentManagerObject1.writeStudentDataToBinaryFile("./resources/Student.ser");
+    
     }
 }

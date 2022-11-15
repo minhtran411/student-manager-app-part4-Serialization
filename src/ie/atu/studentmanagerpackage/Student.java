@@ -1,6 +1,8 @@
 package ie.atu.studentmanagerpackage;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
 
 	// Instance Variables
 	private String studentId;
@@ -95,4 +97,6 @@ public class Student {
 	public String toString() {
 		return this.studentId + "," + this.firstName + "," + this.age;
 	}
+
+
 }
